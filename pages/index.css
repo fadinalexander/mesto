@@ -32,7 +32,14 @@
 @import url(../blocks/element/__description/element__description.css);
 
 @import url(../blocks/like-btn/like-btn.css);
-@import url(../blocks/like-btn/__style/like-btn__style.css);
+
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__btn-close/popup__btn-close.css);
+@import url(../blocks/popup/__header/popup__header.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__btn-save/popup__btn-save.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__paragraph/footer__paragraph.css);
