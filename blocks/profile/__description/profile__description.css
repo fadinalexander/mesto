@@ -1,6 +1,6 @@
 .profile__description {
     margin: 0;
-    padding-top: 16px;
+    padding-top: 6px;
     max-width: 336px;
     width: 100%;
     font-size: 18px;
@@ -8,12 +8,19 @@
     line-height: 21.78px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 634px) {
     .profile__description {
+        text-align: center;
         padding-top: 14px;
-        max-width: 282px;
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 400px;
         line-height: 16.94px;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    .profile__description {
+        font-size: 14px;
+
     }
 }

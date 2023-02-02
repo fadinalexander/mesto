@@ -2,8 +2,11 @@
     margin: 0 0 67px 0;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 954px) {
     .elements {
-        margin: 0 auto 48px;
+        margin: 0 0 48px;
     }
 }
+
+
+

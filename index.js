@@ -1,6 +1,6 @@
-let editButton = document.querySelector('.edit-button');
-let popup = document.querySelector('.popup');
-let closeButton = popup.querySelector('.popup__btn-close');
+const editButton = document.querySelector('.edit-button');
+const popup = document.querySelector('.popup');
+const closeButton = popup.querySelector('.popup__btn-close');
 
 function handleToggleBottomClick () {
     popup.classList.toggle('popup_opened');
@@ -18,8 +18,9 @@ popup.addEventListener('click', handleOverlayClick);
 
 
 const formElement = document.querySelector('.popup__container');
-let nameInput = document.querySelector('.popup__form-name');
-let aboutInput = document.querySelector('.popup__form-about');
+const nameInput = document.querySelector('.popup__form-name');
+const aboutInput = document.querySelector('.popup__form-about');
+
 
 function handleFormSubmit (Event) {
     Event.preventDefault();

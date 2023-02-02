@@ -9,3 +9,9 @@
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
 }
+
+@media screen and (max-width: 634px) {
+    .page {
+        padding-top: 28px;
+    }
+}

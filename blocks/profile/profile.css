@@ -4,10 +4,26 @@
     margin-bottom: 51px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (min-width: 730px) and (max-width: 760px) {
     .profile {
         flex-wrap: wrap;
         justify-content: center;
-        margin-bottom: 0;
+ 
+    }
+}
+
+@media screen and (min-width: 619px) and (max-width: 729px) {
+    .profile {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 618px) {
+    .profile {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: center;
+        margin: 0 auto;
     }
 }
