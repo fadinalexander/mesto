@@ -16,4 +16,4 @@
 
 ### Deploy
 
-* [Ссылка на сайт "Место"]()
+* [Ссылка на сайт "Место"](https://fadinalexander.github.io/mesto/)
