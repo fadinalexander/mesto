@@ -21,12 +21,12 @@
                 <section class="profile">
                     <img class="profile__avatar" src="./images/Jacques-Yves_Cousteau.png" alt="Фото: Жак-Ив Кусто">
                     <div class="profile__block">
-                        <p class="profile__name">Жак-Ив Кусто</p>
-                        <button class="edit-button" name="edit-button" type="button">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" name="edit-button" type="button">
                         </button>
                         <p class="profile__description">Исследователь океана</p>
                     </div>
-                    <button class="add-button" name="add-button" type="button">
+                    <button class="profile__add-button" name="add-button" type="button">
                     </button>
                 </section>
                 <section class="elements">
@@ -35,8 +35,8 @@
                             <img class="element__img" src="./images/Chelyabinsk.jpeg"
                                 alt="Фото: Челябинск">
                                 <div class="element__place-like">
-                                    <p class="element__description">Челябинск</p>
-                                    <button class="like-btn" name="like-btn" type="button">
+                                    <h2 class="element__description">Челябинск</h2>
+                                    <button class="element__like-button" name="like-button" type="button">
                                     </button>
                                 </div>
                         </li>
@@ -44,8 +44,8 @@
                             <img class="element__img" src="./images/Kidji.jpeg"
                                 alt="Фото: Кижи">
                             <div class="element__place-like">
-                                <p class="element__description">Кижи</p>
-                                <button class="like-btn" name="like-btn" type="button">
+                                <h2 class="element__description">Кижи</h2>
+                                <button class="element__like-button" name="like-button" type="button">
                                 </button>
                                 </div>
                         </li>
@@ -53,8 +53,8 @@
                             <img class="element__img" src="./images/Moscow.jpeg"
                                 alt="Фото: Москва">
                             <div class="element__place-like">
-                                <p class="element__description">Москва</p>
-                                <button class="like-btn" name="like-btn" type="button">
+                                <h2 class="element__description">Москва</h2>
+                                <button class="element__like-button" name="like-button" type="button">
                                 </button>
                             </div>                                
                         </li>
@@ -62,8 +62,8 @@
                             <img class="element__img" src="./images/Murmansk.jpeg"
                                 alt="Фото: Мурманск">
                             <div class="element__place-like">
-                                <p class="element__description">Мурманск</p>
-                                <button class="like-btn" name="like-btn" type="button">
+                                <h2 class="element__description">Мурманск</h2>
+                                <button class="element__like-button" name="like-button" type="button">
                                 </button>
                             </div>
                         </li>
@@ -71,8 +71,8 @@
                             <img class="element__img" src="./images/Norilsk.jpeg"
                                 alt="Фото: Норильск">
                             <div class="element__place-like">
-                                <p class="element__description">Норильск</p>
-                                <button class="like-btn" name="like-btn" type="button">
+                                <h2 class="element__description">Норильск</h2>
+                                <button class="element__like-button" name="like-button" type="button">
                                 </button>
                             </div>    
                         </li>
@@ -80,8 +80,8 @@
                             <img class="element__img" src="./images/Ulan-ude.jpeg"
                                 alt="Фото: Улан Уде">
                             <div class="element__place-like">
-                                <p class="element__description">Улан Уде</p>
-                                <button class="like-btn" name="like-btn" type="button">
+                                <h2 class="element__description">Улан Уде</h2>
+                                <button class="element__like-button" name="like-button" type="button">
                                 </button>
                             </div>
                         </li>
@@ -95,15 +95,17 @@
         </div>
 
         <section class="popup">
-            <form class="popup__container">
+            <div class="popup__container">
                 <h2 class="popup__header">Редактировать профиль</h2>
-                <button class="popup__btn-close"></button>
-                <input class="popup__form popup__form-name" type="text" placeholder="Жак-Ив Кусто">
-                <input class="popup__form popup__form-about" type="text" placeholder="Исследователь океана">
-                <button class="popup__btn-save" type="submit">Сохранить</button>
-            </form>            
+                <button class="popup__btn-close" type="button"></button>
+                <form class="popup__form" action="" method="" name="popup__form">
+                    <input class="popup__form popup__form_type_name" name="popup__form_name" type="text" placeholder="Имя">
+                    <input class="popup__form popup__form_type_about" name="popup__form_about"type="text" placeholder="О себе">
+                    <button class="popup__btn-save" type="submit">Сохранить</button>
+                </form>
+            </div>            
         </section>
 
-        <script src="index.js"></script>
+        <script src="./scripts/index.js"></script>
     </body>
 </html>

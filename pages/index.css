@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@import url(../vendor/fonts/Inter-Web/inter.css);
+@import url(../vendor/fonts.css);
 
 @import url(../blocks/page/page.css);
 
@@ -15,10 +15,8 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-@import url(../blocks/edit-button/edit-button.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
-
-@import url(../blocks/add-button/add-button.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__grid/elements__grid.css);
@@ -27,8 +25,7 @@
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__place-like/element__place-like.css);
 @import url(../blocks/element/__description/element__description.css);
-
-@import url(../blocks/like-btn/like-btn.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
