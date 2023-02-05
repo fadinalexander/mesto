@@ -1,6 +1,7 @@
 .profile__block {
     display: inline-flex;
     flex-wrap: wrap;
+    box-sizing: border-box;
     padding-left: 30px;
     max-width: 400px;
     width: 100%;

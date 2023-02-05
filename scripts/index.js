@@ -9,11 +9,9 @@ const profileDescription = document.querySelector('.profile__description');
 
 function handleToggleBottomClick () {
     popup.classList.toggle('popup_opened');
-    if (popup.classList.contains('popup_opened') === true) {
+    if (popup.classList.contains('popup_opened')) {
         nameInput.value = profileName.textContent;
         aboutInput.value = profileDescription.textContent;
-    } else {
-        
     }
 }
 
