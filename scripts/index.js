@@ -1,11 +1,11 @@
 const initialCards = [
   {
     name: 'Челябинск',
-    link: '../images/Chelyabinsk.jpeg'
+    link: '../../../images/Chelyabinsk.jpeg'
   },
   {
     name: 'Кижи',
-    link: '../images/Kidji.jpeg'
+    link: '../../images/Kidji.jpeg'
   },
   {
     name: 'Москва',
@@ -13,7 +13,7 @@ const initialCards = [
   },
   {
     name: 'Мурманск',
-    link: '../images/Murmansk.jpeg'
+    link: './images/Murmansk.jpeg'
   },
   {
     name: 'Норильск',
