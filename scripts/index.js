@@ -17,11 +17,11 @@ const initialCards = [
   },
   {
     name: 'Норильск',
-    link: '../images/Norilsk.jpeg'
+    link: '/images/Norilsk.jpeg'
   },
   {
     name: 'Улан Уде',
-    link: '../images/Ulan-ude.jpeg'
+    link: 'images/Ulan-ude.jpeg'
   }
 ];
 
