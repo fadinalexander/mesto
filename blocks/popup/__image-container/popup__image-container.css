@@ -1,7 +1,5 @@
-.element {
+.popup__image-container {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 282px;
-    max-height: 361px;
 }

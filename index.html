@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,18 +9,17 @@
         <title>Место</title>
         <meta name="description" content="#">
         <meta name="keywords" content="#">
-        <meta name="author" content="Fadin Alexander">
+        <meta lang="en" name="author" content="Fadin Alexander">
     </head>
+    
     <body>
         <div class="page">
-
             <header class="header">
                 <div class="logo header__logo"></div>
             </header>
-                
             <main class="content">
                 <section class="profile">
-                    <img class="profile__avatar" src="./images/Jacques-Yves_Cousteau.png" alt="Фото: Жак-Ив Кусто">
+                    <img class="profile__avatar" src="./images/Jacques-Yves_Cousteau.png" alt="Фото пользователя">
                     <div class="profile__block">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button class="profile__edit-button" name="edit-button" type="button">
@@ -29,83 +29,63 @@
                     <button class="profile__add-button" name="add-button" type="button">
                     </button>
                 </section>
+
                 <section class="elements">
                     <ul class="elements__grid">
-                        <li class="element">
-                            <img class="element__img" src="./images/Chelyabinsk.jpeg"
-                                alt="Фото: Челябинск">
-                                <div class="element__place-like">
-                                    <h2 class="element__description">Челябинск</h2>
-                                    <button class="element__like-button" name="like-button" type="button">
-                                    </button>
-                                </div>
-                        </li>
-                        <li class="element">
-                            <img class="element__img" src="./images/Kidji.jpeg"
-                                alt="Фото: Кижи">
-                            <div class="element__place-like">
-                                <h2 class="element__description">Кижи</h2>
-                                <button class="element__like-button" name="like-button" type="button">
-                                </button>
-                                </div>
-                        </li>
-                        <li class="element">
-                            <img class="element__img" src="./images/Moscow.jpeg"
-                                alt="Фото: Москва">
-                            <div class="element__place-like">
-                                <h2 class="element__description">Москва</h2>
-                                <button class="element__like-button" name="like-button" type="button">
-                                </button>
-                            </div>                                
-                        </li>
-                        <li class="element">
-                            <img class="element__img" src="./images/Murmansk.jpeg"
-                                alt="Фото: Мурманск">
-                            <div class="element__place-like">
-                                <h2 class="element__description">Мурманск</h2>
-                                <button class="element__like-button" name="like-button" type="button">
-                                </button>
-                            </div>
-                        </li>
-                        <li class="element">
-                            <img class="element__img" src="./images/Norilsk.jpeg"
-                                alt="Фото: Норильск">
-                            <div class="element__place-like">
-                                <h2 class="element__description">Норильск</h2>
-                                <button class="element__like-button" name="like-button" type="button">
-                                </button>
-                            </div>    
-                        </li>
-                        <li class="element">
-                            <img class="element__img" src="./images/Ulan-ude.jpeg"
-                                alt="Фото: Улан Уде">
-                            <div class="element__place-like">
-                                <h2 class="element__description">Улан Уде</h2>
-                                <button class="element__like-button" name="like-button" type="button">
-                                </button>
-                            </div>
-                        </li>
                     </ul>
-
                 </section>
+
             </main>
             <footer class="footer">
                 <p class="footer__paragraph">© 2020 Mesto Russia</p>
             </footer>
         </div>
 
-        <section class="popup">
-            <div class="popup__container">
-                <h2 class="popup__header">Редактировать профиль</h2>
-                <button class="popup__btn-close" type="button"></button>
-                <form class="popup__form" action="" method="" name="popup__form">
-                    <input class="popup__form popup__form_type_name" name="popup__form_name" type="text" placeholder="Имя">
-                    <input class="popup__form popup__form_type_about" name="popup__form_about"type="text" placeholder="О себе">
-                    <button class="popup__btn-save" type="submit">Сохранить</button>
-                </form>
-            </div>            
-        </section>
+            <div class="popup popup_type_edit-user">
+                <div class="popup__container">
+                    <h2 class="popup__header">Редактировать профиль</h2>
+                    <button class="popup__btn-close" type="button"></button>
+                    <form class="popup_form_edit" action="" method="" name="popup__form">
+                        <input class="popup__form popup__form_type_name" name="popup__form_name" type="text" placeholder="Имя">
+                        <input class="popup__form popup__form_type_about" name="popup__form_about"type="text" placeholder="О себе">
+                        <button class="popup__btn-save" type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+           
+            <div class="popup popup_type_add-card">
+                <div class="popup__container">
+                    <h2 class="popup__header">Новое место</h2>
+                    <button class="popup__btn-close" type="button"></button>
+                    <form class="popup_form_add" action="" method="" name="popup__form">
+                        <input class="popup__form popup__form_type_place" name="popup__form_name" type="text" placeholder="Название">
+                        <input class="popup__form popup__form_type_place-link" name="popup__form_about"type="text" placeholder="Ссылка на картинку">
+                        <button class="popup__btn-save" type="submit">Создать</button>
+                    </form>
+                </div>      
+            </div>
+
+            <div class="popup popup_type_zoom-image">
+                <div class="popup__image-container">
+                    <button class="popup__btn-close" type="button"></button>
+                    <img class="popup__zoomCont-image" src="" alt="">
+                    <h2 class="popup__zoomCont-header"></h2>
+                </div>
+            </div>
+
+        <template class="template">
+            <li class="element">
+                <button class="element__delete-button" name="delete-button" type="button"></button>
+                <img class="element__img" src="" alt="">
+                <div class="element__place-like">
+                    <h2 class="element__description"></h2>
+                    <button class="element__like-button" name="like-button" type="button">
+                    </button>
+                </div>
+            </li>
+        </template>
 
         <script src="./scripts/index.js"></script>
+
     </body>
 </html>
