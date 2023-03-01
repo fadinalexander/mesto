@@ -25,150 +25,36 @@ const initialCards = [
   }
 ];
 
-const popup = document.querySelector('.popup');
-  const popupBtnEditUser = document.querySelector('.popup_type_edit-user')
-  const popupBtnAddCard = document.querySelector('.popup_type_add-card')
-  const popupBtnClose = document.querySelectorAll('.popup__btn-close')
+//DOM узлы
+
+const template = document.querySelector('#template').content.querySelector('.element')
+
+const cardsContainer = document.querySelector('.elements__grid')
+
+const formEdit = document.querySelector('.popup_form_edit')
+const formAdd = document.querySelector('.popup_form_add')
 
 
-const formEditUser = document.querySelector('.popup_form_edit')
-const formAddCard = document.querySelector('.popup_form_add')
-const formZoomImage = document.querySelector('.popup_form_zoom')
+const editBtn = document.querySelector('.profile__edit-button')
+const editUserModal = document.querySelector('.popup_type_edit-user')
 
-const editButton = document.querySelector('.profile__edit-button');
-const editButtonClose = document.querySelector('.popup_type_edit-user .popup__container .popup__btn-close')
+const addBtn = document.querySelector('.profile__add-button')
+const addCardModal = document.querySelector('.popup_type_add-card')
 
-const addCardButton = document.querySelector('.profile__add-button')
-const addCardButtonClose = document.querySelector('.popup_type_add-card .popup__container .popup__btn-close');
+const closeModal = document.querySelectorAll('.popup__btn-close')
 
+const profileName = document.querySelector('.profile__name')
+const profileDescription = document.querySelector('.profile__description')
+const nameInput = document.querySelector('.popup__form_type_name')
+const aboutInput = document.querySelector('.popup__form_type_about')
 
-const formElement = document.querySelector('.popup__form');
-  const nameInput = popup.querySelector('.popup__form_type_name');
-  const aboutInput = popup.querySelector('.popup__form_type_about');
-  const placeInput = document.querySelector('.popup__form_type_place')
-  const placeLinkInput = document.querySelector('.popup__form_type_place-link')
-
-  const profileName = document.querySelector('.profile__name');
-  const profileDescription = document.querySelector('.profile__description');
-
-const popupEditCardHeader = popup.querySelector('.popup__header')
-const createButton = document.querySelector('.popup__btn-save')
-
-  const template = document.querySelector('.template')
-  const itemListWrapper = document.querySelector('.elements__grid')
-
-  const zoomImg = document.querySelector('.popup__zoomCont-image')
-  const zoomHeader = document.querySelector('.popup__zoomCont-header')
-  const popupZoomImage = document.querySelector('.popup_type_zoom-image')
- 
-
-//Метод 1:
-//Функция для отрисовки карточек из массива
-// initialCards.forEach(({name, link}) => {
-//   const newItem = template.content.cloneNode(true)
-//   newItem.querySelector('.element__description').textContent = name
-//   newItem.querySelector('.element__img').src = link
-//   newItem.querySelector('.element__img').setAttribute('alt', name)
-//   itemListWrapper.append(newItem)
-// })
-
-//Метод 2:
-// Функция для отрисовки карточек из массива
-const getItem = (header, image) => {
-  const newItem = template.content.cloneNode(true)
-  newItem.querySelector('.element__description').textContent = header
-  newItem.querySelector('.element__img').src = image
-  return newItem
-}
-
-const renderItem = (wrapper, title, image) => {
-  wrapper.append(getItem(title, image))
-}
-
-initialCards.forEach(({name, link}) => {
-  renderItem(itemListWrapper, name, link)
-})
-
-//функция ОТКРЫТИЯ модальных окон
-const openPopup = (popupType) => {
-  popupType.classList.add('popup_opened')
-  if (popupBtnEditUser.classList.contains('popup_opened')) {
-    nameInput.value = profileName.textContent
-    aboutInput.value = profileDescription.textContent
-  }
-}
-
-//функция ЗАКРЫТИЯ модальных окон
-const closePopup = (popupType) => {
-  popupType.classList.remove('popup_opened')
-}
-
-//слушатель для 'click' ЗАКРЫТИЯ всех модальных окон
-popupBtnClose.forEach((item) => {
-  const modal = item.closest('.popup')
-  item.addEventListener('click', () => closePopup(modal))
-})
-
-//слушатель для 'click' открытия модального окна editButton
-editButton.addEventListener('click', () => {
-  openPopup(popupBtnEditUser)
-})
-
-//слушатель для 'click' открытия модального окна addButton
-addCardButton.addEventListener('click', () => {
-  openPopup(popupBtnAddCard)
-})
-
-//функция-обработчик формы 'submit' для редактирования профиля
-const handleFormEditSubmit = (evt) => {
-  evt.preventDefault()
-  profileName.textContent = nameInput.value
-  profileDescription.textContent = aboutInput.value
-
-  closePopup(popupBtnEditUser)
-}
-
-//слушатель для 'submit' для редактирования профиля
-popupBtnEditUser.addEventListener('submit', handleFormEditSubmit);
-
-//функция-обработчик формы 'submit' для добавления карточки
-const handleFormAddCardSubmit = (evt) => {
-  evt.preventDefault()
-  const imageTitle = placeInput.value
-  const imageLink = placeLinkInput.value
-  const newItem = template.content.cloneNode(true)
-  newItem.querySelector('.element__description').textContent = imageTitle
-  newItem.querySelector('.element__img').src = imageLink
-  newItem.querySelector('.element__img').alt = imageTitle
-  itemListWrapper.prepend(newItem)
-  placeInput.value = ''
-  placeLinkInput.value = ''
-
-  const openImage = document.querySelectorAll(".element__img");
-openImage.forEach((item) => {
-    item.addEventListener("click", openPopupZoomImage)
-})
-const deleteButton = document.querySelectorAll('.element__delete-button')
-deleteButton.forEach(button => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.element')
-    card.remove()
-  })
-})
-const likeButton = document.querySelectorAll('.element__like-button')
-likeButton.forEach(button => {
-  button.addEventListener('click', () => {
-    button.classList.toggle('element__like-button_active')
-  })
-})
-  
-  closePopup(popupBtnAddCard)
-}
-//слушатель для 'submit' добавления карточки
-popupBtnAddCard.addEventListener('submit', handleFormAddCardSubmit);
 
 //функция для открытия модального окна по клику на картинку
-const openPopupZoomImage = (evt) => {
+const handleClickImageModal = (evt) => {
+  const zoomImg = document.querySelector('.popup__zoomCont-image')
+  const zoomHeader = document.querySelector('.popup__zoomCont-header')
+  const imageBtn = document.querySelector('.popup_type_zoom-image')
+ 
   const imgSrc = evt.target.getAttribute('src')
   const imgAlt = evt.target.getAttribute('alt')
 
@@ -176,31 +62,97 @@ const openPopupZoomImage = (evt) => {
   zoomImg.setAttribute('alt', imgAlt)
   zoomHeader.textContent = imgAlt
 
-  openPopup(popupZoomImage)
+  handleClickModalOpen(imageBtn)
 }
 
-const openImage = document.querySelectorAll(".element__img");
-openImage.forEach((item) => {
-    item.addEventListener("click", openPopupZoomImage)
+// функция для кнопки deleteBtn
+const handleClickDeleteCard = (evt) => {
+  evt.target.closest('.element').remove()
+}
+
+//функция для кнопки likeBtn
+const handleClickLikeCard = (evt) => {
+  evt.target.classList.toggle('element__like-button_active')
+}
+
+//функция генерации карточки
+const generateCard = (dataCard) => {
+  const newCard = template.cloneNode(true)
+
+  const imgLink = newCard.querySelector('.element__img')
+  const imgName = newCard.querySelector('.element__description')
+  imgName.textContent = dataCard.name
+  imgLink.src = dataCard.link
+  imgLink.alt = dataCard.name
+  
+  imgLink.addEventListener('click', handleClickImageModal)
+  
+  const deleteBtn = newCard.querySelector('.element__delete-button')
+  deleteBtn.addEventListener('click', handleClickDeleteCard)
+  
+  const likeBtn = newCard.querySelector('.element__like-button')
+  likeBtn.addEventListener('click', handleClickLikeCard)
+
+  return newCard
+}
+
+//функция отрисовки карточки методом prepend()
+const renderCard = (dataCard) => {
+  cardsContainer.prepend(generateCard(dataCard))
+}
+
+//итерация каждого элемента массива
+initialCards.forEach((dataCard) => {
+  renderCard(dataCard)
 })
 
-const deleteButton = document.querySelectorAll('.element__delete-button')
-deleteButton.forEach(button => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.element')
-    card.remove()
-  })
-})
-
-const likeButton = document.querySelectorAll('.element__like-button')
-likeButton.forEach(button => {
-  button.addEventListener('click', () => {
-    button.classList.toggle('element__like-button_active')
-  })
-})
-
-likeButton.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('element__like-button')) {
-    evt.target.classList.toggle('element__like-button_active')
+//функция ОТКРЫТИЯ модальных окон
+const handleClickModalOpen = (popup) => {
+  popup.classList.add('popup_opened')
+  if (editUserModal.classList.contains('popup_opened')) {
+    nameInput.value = profileName.textContent
+    aboutInput.value = profileDescription.textContent
   }
+}
+//слушатели 'click' для modal open
+editBtn.addEventListener('click', () => {
+  handleClickModalOpen(editUserModal)
 })
+addBtn.addEventListener('click', () => {
+  handleClickModalOpen(addCardModal)
+})
+
+//функция ЗАКРЫТИЯ модальных окон
+const handleClickModalClose = (popup) => {
+  popup.classList.remove('popup_opened')
+}
+//слушатели 'click' для modal close
+closeModal.forEach((item) => {
+  const modal = item.closest('.popup')
+  item.addEventListener('click', () => handleClickModalClose(modal))
+})
+
+//функция-обработчик 'submit' для editUser
+const handleSubmitEditUser = (evt) => {
+  evt.preventDefault()
+  profileName.textContent = nameInput.value
+  profileDescription.textContent = aboutInput.value
+
+  handleClickModalClose(editUserModal)
+}
+//слушатель 'submit' для editUser
+formEdit.addEventListener('submit', handleSubmitEditUser);
+
+//функция-обработчик 'submit' для addCard
+const handleSubmitAddCard = (evt) => {
+  evt.preventDefault()
+  const inputName = document.querySelector('.popup__form_type_place')
+  const inputLink = document.querySelector('.popup__form_type_place-link')
+  renderCard({name: inputName.value, link: inputLink.value})
+  inputName.value = ''
+  inputLink.value = ''
+
+  handleClickModalClose(addCardModal)
+}
+//слушатель 'submit' для addCard
+formAdd.addEventListener('submit', handleSubmitAddCard)
