@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Карелия',
-    link: 'https://images.unsplash.com/photo-1609800971317-05898953d4f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8JUQwJUJBJUQwJUIwJUQxJTgwJUQwJUI1JUQwJUJCJUQwJUI4JUQxJThGfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Сочи',
-    link: 'https://images.unsplash.com/photo-1612274059446-5c480106b1cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8JUQwJUIwJUQwJUI0JUQwJUJCJUQwJUI1JUQxJTgwfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Москва',
-    link: 'https://images.unsplash.com/photo-1613327345946-551b8ecf2afe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8JUQwJUJDJUQwJUJFJUQxJTgxJUQwJUJBJUQwJUIyJUQwJUIwfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Воронеж',
-    link: 'https://images.unsplash.com/photo-1617554575308-a2bda60cbef6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8JUQwJUIyJUQwJUJFJUQxJTgwJUQwJUJFJUQwJUJEJUQwJUI1JUQwJUI2fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Челябинск',
-    link: 'https://images.unsplash.com/photo-1589793242170-029606c12c84?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8JUQxJTg3JUQwJUI1JUQwJUJCJUQxJThGJUQwJUIxJUQwJUI4JUQwJUJEJUQxJTgxJUQwJUJBfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://images.unsplash.com/photo-1645016978367-5a81d12f915d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8JUQwJUJBJUQwJUIwJUQwJUJDJUQxJTg3JUQwJUIwJUQxJTgyJUQwJUJBJUQwJUIwfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  }
-];
-
 //DOM узлы
 
 const template = document.querySelector('#template').content.querySelector('.element')
