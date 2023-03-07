@@ -127,3 +127,13 @@ const handleSubmitAddCard = (evt) => {
 }
 //слушатель 'submit' для addCard
 formAdd.addEventListener('submit', handleSubmitAddCard)
+
+
+
+// function handleOverlayClick (Event) { 
+//   if (Event.target === Event.currentTarget) { 
+//       popup.classList.remove('popup_opened'); 
+//   } 
+// } 
+
+// popup.addEventListener('click', handleOverlayClick); 
