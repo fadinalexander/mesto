@@ -4,8 +4,8 @@ const template = document.querySelector('#template').content.querySelector('.ele
 
 const cardsContainer = document.querySelector('.elements__grid')
 
-const formEdit = document.querySelector('.popup__form_edit')
-const formAdd = document.querySelector('.popup__form_add')
+const formEdit = document.querySelector('.form_edit')
+const formAdd = document.querySelector('.form_add')
 
 
 const editBtn = document.querySelector('.profile__edit-button')
@@ -28,6 +28,9 @@ const imageBtn = document.querySelector('.popup_type_zoom-image')
 const inputName = document.querySelector('.popup__form_type_place')
 const inputLink = document.querySelector('.popup__form_type_place-link')
 
+const popupList = document.querySelectorAll('.popup');
+const formList = document.querySelectorAll('.form')
+
 //функция для открытия модального окна по клику на картинку
 const handleClickImageModal = (evt) => {
  
@@ -37,6 +40,8 @@ const handleClickImageModal = (evt) => {
   zoomImg.setAttribute('src', imgSrc)
   zoomImg.setAttribute('alt', imgAlt)
   zoomHeader.textContent = imgAlt
+ 
+  
 
   handleClickModalOpen(imageBtn)
 }
@@ -50,6 +55,7 @@ const handleClickDeleteCard = (evt) => {
 const handleClickLikeCard = (evt) => {
   evt.target.classList.toggle('element__like-button_active')
 }
+
 
 //функция генерации карточки
 const generateCard = (dataCard) => {
@@ -82,17 +88,31 @@ initialCards.forEach((dataCard) => {
   renderCard(dataCard)
 })
 
+
 //функция ОТКРЫТИЯ модальных окон
 const handleClickModalOpen = (popup) => {
+  resetValidation(addCardModal, formValidationConfig)
+  resetValidation(editUserModal, formValidationConfig)
   popup.classList.add('popup_opened')
+
 }
+
+function formReset() {
+  formList.forEach(form => form.reset())
+}
+
+
+formReset()
 //слушатели 'click' для modal open
 editBtn.addEventListener('click', () => {
+  formReset()
   nameInput.value = profileName.textContent
   aboutInput.value = profileDescription.textContent
   handleClickModalOpen(editUserModal)
+
 })
 addBtn.addEventListener('click', () => {
+  formReset()
   handleClickModalOpen(addCardModal)
 })
 
@@ -100,6 +120,7 @@ addBtn.addEventListener('click', () => {
 const handleClickModalClose = (popup) => {
   popup.classList.remove('popup_opened')
 }
+
 //слушатели 'click' для modal close
 closeModals.forEach((item) => {
   const modal = item.closest('.popup')
@@ -128,12 +149,16 @@ const handleSubmitAddCard = (evt) => {
 //слушатель 'submit' для addCard
 formAdd.addEventListener('submit', handleSubmitAddCard)
 
+//закрытие всех модальных окон при клике на overlay
+popupList.forEach(popup => {
+  popup.addEventListener('click', handleOverlayClick)
+  document.addEventListener('keydown', handleOverlayClick)
+})
 
-
-// function handleOverlayClick (Event) { 
-//   if (Event.target === Event.currentTarget) { 
-//       popup.classList.remove('popup_opened'); 
-//   } 
-// } 
-
-// popup.addEventListener('click', handleOverlayClick); 
+function handleOverlayClick(evt) {
+  popupList.forEach(popup => {
+    if (evt.target === evt.currentTarget || evt.key === 'Escape') {
+      popup.classList.remove('popup_opened')
+    }
+  })
+}
