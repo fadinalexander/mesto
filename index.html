@@ -45,11 +45,42 @@
                 <div class="popup__container">
                     <h2 class="popup__header">Редактировать профиль</h2>
                     <button class="popup__btn-close" type="button"></button>
-                    <form class="popup__form popup__form_edit" action="" method="" name="popup__form">
-                        <input class="popup__form popup__form_type_name" name="popup__form_name" type="text" placeholder="Имя">
-                        <input class="popup__form popup__form_type_about" name="popup__form_about"type="text" placeholder="О себе">
+                    <form 
+                        novalidate
+                        class="form form_edit"
+                        action=""
+                        method="" 
+                        name="form_edit">
+                        
+                        <input
+                            id="input-name"
+                            required
+                            autocomplete="off"
+                            class="popup__form popup__form_type_name"
+                            type="text"
+                            minlength="2"
+                            maxlength="40"
+                            placeholder="Имя"
+                            name="popup__form_name"
+                        >
+                        <span id="input-name-error" class="error"></span>
+
+                        <input
+                            id="input-about"
+                            required
+                            autocomplete="off"
+                            class="popup__form popup__form_type_about"
+                            type="text"
+                            minlength="2"
+                            maxlength="200"
+                            placeholder="О себе"
+                            name="popup__form_about"
+                        >
+                        <span id="input-about-error" class="error"></span>
+
                         <button class="popup__btn-save" type="submit">Сохранить</button>
                     </form>
+
                 </div>
             </div>
            
@@ -57,9 +88,34 @@
                 <div class="popup__container">
                     <h2 class="popup__header">Новое место</h2>
                     <button class="popup__btn-close" type="button"></button>
-                    <form class="popup__form popup__form_add" action="" method="" name="popup__form">
-                        <input class="popup__form popup__form_type_place" name="popup__form_name" type="text" placeholder="Название">
-                        <input class="popup__form popup__form_type_place-link" name="popup__form_about"type="text" placeholder="Ссылка на картинку">
+                    <form
+                        novalidate
+                        class="form form_add"
+                        action=""
+                        method=""
+                        name="form_add"
+                    >
+                        <input
+                            required
+                            id="input-place"
+                            autocomplete="off"
+                            class="popup__form popup__form_type_place"
+                            type="text"
+                            minlength="2"
+                            maxlength="30"
+                            placeholder="Название"
+                            name="popup__form_name"
+                        >
+                        <span id="input-place-error" class="error"></span>
+                        <input
+                            required
+                            id="input-url"
+                            class="popup__form popup__form_type_place-link"
+                            type="url"
+                            placeholder="Ссылка на картинку"
+                            name="popup__form_about"
+                        >
+                        <span id="input-url-error" class="error"></span>
                         <button class="popup__btn-save" type="submit">Создать</button>
                     </form>
                 </div>      
@@ -85,6 +141,7 @@
             </li>
         </template>
 
+        <script src="./scripts/validate.js"></script>
         <script src="./scripts/cards.js"></script>
         <script src="./scripts/index.js"></script>
 
