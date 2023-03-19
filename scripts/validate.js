@@ -1,105 +1,92 @@
 const formValidationConfig = {
     formSelector: '.form',
     inputSelector: '.popup__form',
-    errorClass: 'popup__form_type_error',
-    buttonSelector: '.popup__btn-save',
-    buttonDisabledClass: 'popup__btn-save_disabled'
+    submitButtonSelector: '.popup__btn-save',
+    activeErrorClass: 'popup__form_type_error',
+    buttonDisabledClass: 'popup__btn-save_disabled',        
 }
 
+const resetValidation = (form, config) => {
+    const inputList = form.querySelectorAll(config.inputSelector)
 
-function resetValidation(form, config) {
-    const inputList = form.querySelectorAll(config.inputSelector);
-    const buttonSubmit = form.querySelector(config.buttonSelector);
-  
     inputList.forEach((input) => {
-      input.removeEventListener('input', () => handdleFormInput(evt, config));
-      input.classList.remove(config.errorClass);
-      const errorElement = document.querySelector(`#${input.id}-error`);
-      errorElement.textContent = '';
-    });
-  
-    buttonSubmit.disabled = true;
-    buttonSubmit.classList.add(config.buttonDisabledClass);
-  
-    enableValidation(config);
-  }
-
-
-
-//функция отмены submit для формы
-function disableSubmit(evt) {
-    evt.preventDefault()
-}
-
-//функция включения валидации
-function enableValidation(config) {
-    
-    //находим форму
-    const formList = document.querySelectorAll(config.formSelector)
-    formList.forEach((form) => {
-
-        //отменим стандартную отправку формы
-        form.addEventListener('submit', disableSubmit)
-    
-        //добавляем слушатель на каждый раз, когда мы что то вводим
-        form.addEventListener('input', () => toggleButtom(form, config))
-    
-        //вызываем функцию
-        addInputListeners(form, config)
-    
-        //вызываем функцию
-        toggleButtom(form, config)
-
-
-
-    })
-}
-
-//функция которая добавляет класс на невалидный инпут чтобы он подсвечивался красным
-function handdleFormInput(evt, config) {
-    //находим инпут, на котором у нас сработало событие
-    const input = evt.target
-    //найдем инпут id
-    const inputId = input.id
-    //найдем span
-    const errorElement = document.querySelector(`#${inputId}-error`)
-
-    if (input.validity.valid) {
-        input.classList.remove(config.errorClass)
+        input.classList.remove(config.activeErrorClass)
+        const errorElement = document.querySelector(`#${input.id}-error`)
         errorElement.textContent = ''
+    });
+}
+
+const showInputError = (errorTextElement, input, config) => {
+    errorTextElement.textContent = input.validationMessage
+    input.classList.add(config.activeErrorClass)
+}
+
+const hideInputError = (errorTextElement, input, config) => {
+    errorTextElement.textContent = ''
+    input.classList.remove(config.activeErrorClass)
+}
+
+const enableButton = (submitButton, config) => {
+    submitButton.classList.remove(config.buttonDisabledClass)
+    submitButton.disabled = false
+}
+
+const disableButton = (submitButton, config) => {
+    submitButton.classList.add(config.buttonDisabledClass)
+    submitButton.disabled = true
+}
+
+const hasInvalidInput = (inputList) => {   
+    return Array.from(inputList).some(input => !input.validity.valid)  
+}
+
+const toggleButtonState = (submitButton, config, inputList) => {
+    //console.log(submitButton)
+    submitButton.disabled = true
+    if (!hasInvalidInput(inputList)) {
+        enableButton(submitButton, config)
     } else {
-        input.classList.add(config.errorClass)
-        errorElement.textContent = input.validationMessage
-        //в input.validationMessage хранится стандартный текст сообщения
+        disableButton(submitButton, config)
     }
 }
 
-//функция toogle bottom valid
-function toggleButtom(form, config) {
-
-    //найдем кнопку
-    //в нашем случае кнопка вложена в форму, поэтому в функцию передаем еще и form
-    const buttonSubmit = form.querySelector(config.buttonSelector)
-    
-    //воспользуемся методом, который проверяет ФОРМУ на валидность checkValidity
-    const isFormValid = form.checkValidity()
-    
-
-    buttonSubmit.disabled = !isFormValid
-    
-    buttonSubmit.classList.toggle(config.buttonDisabledClass, !isFormValid)
-    //у тогл есть второй параметр, который буде в зависимости от того true or false он, переключать этот элемент
+const checkInputValidity = (form, input, config) => {
+    const errorTextElement = form.querySelector(`#${input.id}-error`)
+    //console.log(errorTextElement)
+    if (input.validity.valid) {
+        hideInputError(errorTextElement, input, config)
+        //console.log(input)
+    } else {
+        showInputError(errorTextElement, input, config)
+    }
 }
 
-//функция которая навешивает слушателей на input
-function addInputListeners(form, config) {
-//form так как ищем в ней инпуты config так как в нем будем искать все импуты по селектору
-
-    //сейчас берем каждый импут и вешаем на него обработчик
-    const inputList = form.querySelectorAll(config.inputSelector)
-    inputList.forEach(function (item) {
-        item.addEventListener('input', (evt) => handdleFormInput(evt, config))
+const setEventListeners = (form, inputList, config, submitButton) => {
+    form.addEventListener('submit', (evt) => {
+        evt.preventDefault()
+    })
+    inputList.forEach((input) => {
+        input.addEventListener('input', (evt) => {
+            checkInputValidity(form, input, config)
+            //console.log(evt.target.value)
+            toggleButtonState(submitButton, config, inputList)
+        })
+    })
+    form.addEventListener('reset', () => {
+        setTimeout(() => {
+            toggleButtonState(submitButton, config, inputList)
+        })
     })
 }
-  
+
+const enableValidation = (config) => {
+    const forms = document.querySelectorAll(config.formSelector)
+    forms.forEach(form => {
+        const inputList = form.querySelectorAll(config.inputSelector)  
+        const submitButton = form.querySelector(config.submitButtonSelector)
+
+        setEventListeners(form, inputList, config, submitButton)
+    })
+}
+
 enableValidation(formValidationConfig)
