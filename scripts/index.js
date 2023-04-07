@@ -1,7 +1,8 @@
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
+import { initialCards, cardTemplateConfig, formValidationConfig } from './constants.js'
 
-const template = document.querySelector('#template').content.querySelector('.element')
+//const template = document.querySelector('#template').content.querySelector('.element')
 
 const cardsContainer = document.querySelector('.elements__grid')
 
@@ -32,78 +33,28 @@ const popupList = document.querySelectorAll('.popup');
 const formList = document.querySelectorAll('.form')
 
 
-//функция для открытия модального окна по клику на картинку
-const handleClickImageModal = (dataCard) => {
-  const imgSrc = dataCard.getAttribute('src')
-  const imgAlt = dataCard.getAttribute('alt')
-
-  zoomImg.setAttribute('src', imgSrc)
-  zoomImg.setAttribute('alt', imgAlt)
-  zoomHeader.textContent = imgAlt
- 
-  openModal(imageBtn)
-}
-
-
-// функция для кнопки deleteBtn
-const handleClickDeleteCard = (evt) => {
-  evt.target.closest('.element').remove()
-}
-
-
-//функция для кнопки likeBtn
-const handleClickLikeCard = (evt) => {
-  evt.target.classList.toggle('element__like-button_active')
-}
-
-
-//функция генерации карточки
-const generateCard = (dataCard) => {
-  const newCard = template.cloneNode(true)
-
-  const imgLink = newCard.querySelector('.element__img')
-  const imgName = newCard.querySelector('.element__description')
-  imgName.textContent = dataCard.name
-  imgLink.src = dataCard.link
-  imgLink.alt = dataCard.name
-  
-  imgLink.addEventListener('click', () => handleClickImageModal(imgLink))
-  
-  const deleteBtn = newCard.querySelector('.element__delete-button')
-  deleteBtn.addEventListener('click', handleClickDeleteCard)
-  
-  const likeBtn = newCard.querySelector('.element__like-button')
-  likeBtn.addEventListener('click', handleClickLikeCard)
-
-  return newCard
-}
-
-
-//функция отрисовки карточки методом prepend()
-const renderCard = (dataCard) => {
-  cardsContainer.prepend(generateCard(dataCard))
-}
-
-
-//итерация каждого элемента массива
-//Если внутри безымянной (стрелочной) функции вызывается одна функция с точно такими же аргументами, то эта безымянная функция не нужна. Это лишняя обертка вокруг самой функции, которую можно использовать просто сразу в коде
-// initialCards.forEach((dataCard) => {
-//   renderCard(dataCard)
-// })
-initialCards.forEach(renderCard)
-
-
 //функция ОТКРЫТИЯ модальных окон
 const openModal = (popup) => {
   popup.classList.add('popup_opened')
   document.addEventListener('keydown', closeByEscape)
 }
 
+//функция отрисовки карточки методом prepend()
+const renderCard = (dataCard) => {
+  const card = new Card(dataCard, cardTemplateConfig.templateSelector, openModal)
+  cardsContainer.prepend(card.generateCard(dataCard))
+}
+
+
+//итерация каждого элемента массива
+// initialCards.forEach((dataCard) => {
+//   renderCard(dataCard)
+// })
+initialCards.forEach(renderCard)
 
 function resetForms() {
   formList.forEach(form => form.reset())
 }
-
 
 //слушатели 'click' для modal open
 editBtn.addEventListener('click', () => {
@@ -111,29 +62,26 @@ editBtn.addEventListener('click', () => {
   nameInput.value = profileName.textContent
   aboutInput.value = profileDescription.textContent
   openModal(editUserModal)
-  resetValidation(editUserModal, formValidationConfig)
+  //resetValidation(editUserModal, formValidationConfig)
+  const formValidatorForAddForm = new FormValidator(formValidationConfig, formAdd)
+  formValidatorForAddForm.enableValidation()
+  formValidatorForAddForm.resetValidation()
 })
-
 
 addBtn.addEventListener('click', () => {
   resetForms()
   openModal(addCardModal)
-  resetValidation(addCardModal, formValidationConfig)
+  //resetValidation(addCardModal, formValidationConfig)
+  const formValidatorForEditForm = new FormValidator(formValidationConfig, formEdit)
+  formValidatorForEditForm.enableValidation()
+  formValidatorForEditForm.resetValidation()
 })
-
 
 //функция ЗАКРЫТИЯ модальных окон
 const closeModal = (popup) => {
   popup.classList.remove('popup_opened')
   document.removeEventListener('keydown', closeByEscape)
 }
-
-
-//слушатели 'click' для modal close
-// closeButtons.forEach((item) => {
-//   const modal = item.closest('.popup')
-//   item.addEventListener('click', () => closeModal(modal))
-// })
 
 popupList.forEach(popup => {
   popup.addEventListener('mousedown', (evt) => {
@@ -146,7 +94,6 @@ popupList.forEach(popup => {
   })
 })
 
-
 //функция-обработчик 'submit' для editUser
 const handleSubmitEditUser = (evt) => {
   evt.preventDefault()
@@ -156,10 +103,8 @@ const handleSubmitEditUser = (evt) => {
   closeModal(editUserModal)
 }
 
-
 //слушатель 'submit' для editUser
 formEdit.addEventListener('submit', handleSubmitEditUser);
-
 
 //функция-обработчик 'submit' для addCard
 const handleSubmitAddCard = (evt) => {
@@ -170,25 +115,8 @@ const handleSubmitAddCard = (evt) => {
   closeModal(addCardModal)
 }
 
-
 //слушатель 'submit' для addCard
 formAdd.addEventListener('submit', handleSubmitAddCard)
-
-
-//закрытие всех модальных окон при клике на overlay
-// popupList.forEach(popup => {
-//   popup.addEventListener('mousedown', handleOverlayClick)
-//   document.addEventListener('keydown', handleOverlayClick)
-// })
-
-
-// function handleOverlayClick(evt) {
-//   popupList.forEach(popup => {
-//     if (evt.target === evt.currentTarget || evt.key === 'Escape') {
-//       popup.classList.remove('popup_opened')
-//     }
-//   })
-// }
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
