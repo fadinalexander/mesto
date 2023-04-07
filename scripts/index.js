@@ -15,16 +15,16 @@ const editUserModal = document.querySelector('.popup_type_edit-user')
 const addBtn = document.querySelector('.profile__add-button')
 const addCardModal = document.querySelector('.popup_type_add-card')
 
-const closeButtons = document.querySelectorAll('.popup__btn-close')
+//const closeButtons = document.querySelectorAll('.popup__btn-close')
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
 const nameInput = document.querySelector('.popup__form_type_name')
 const aboutInput = document.querySelector('.popup__form_type_about')
 
-const zoomImg = document.querySelector('.popup__zoomCont-image')
-const zoomHeader = document.querySelector('.popup__zoomCont-header')
-const imageBtn = document.querySelector('.popup_type_zoom-image')
+// const zoomImg = document.querySelector('.popup__zoomCont-image')
+// const zoomHeader = document.querySelector('.popup__zoomCont-header')
+// const imageBtn = document.querySelector('.popup_type_zoom-image')
 
 const inputName = document.querySelector('.popup__form_type_place')
 const inputLink = document.querySelector('.popup__form_type_place-link')
@@ -45,36 +45,40 @@ const renderCard = (dataCard) => {
   cardsContainer.prepend(card.generateCard(dataCard))
 }
 
-
 //итерация каждого элемента массива
 // initialCards.forEach((dataCard) => {
 //   renderCard(dataCard)
 // })
 initialCards.forEach(renderCard)
 
-function resetForms() {
-  formList.forEach(form => form.reset())
-}
+// function resetForms() {
+//   formList.forEach(form => form.reset())
+// }
+
+const formValidatorForEditForm = new FormValidator(formValidationConfig, formEdit)
+formValidatorForEditForm.enableValidation()
+
+const formValidatorForAddForm = new FormValidator(formValidationConfig, formAdd)
+formValidatorForAddForm.enableValidation()
 
 //слушатели 'click' для modal open
 editBtn.addEventListener('click', () => {
-  resetForms()
+  //resetForms()
+  formEdit.reset()
   nameInput.value = profileName.textContent
   aboutInput.value = profileDescription.textContent
   openModal(editUserModal)
-  //resetValidation(editUserModal, formValidationConfig)
-  const formValidatorForAddForm = new FormValidator(formValidationConfig, formAdd)
-  formValidatorForAddForm.enableValidation()
-  formValidatorForAddForm.resetValidation()
+
+  formValidatorForEditForm.resetValidation()
 })
 
+
 addBtn.addEventListener('click', () => {
-  resetForms()
+  //resetForms()
+  formAdd.reset()
   openModal(addCardModal)
-  //resetValidation(addCardModal, formValidationConfig)
-  const formValidatorForEditForm = new FormValidator(formValidationConfig, formEdit)
-  formValidatorForEditForm.enableValidation()
-  formValidatorForEditForm.resetValidation()
+
+  formValidatorForAddForm.resetValidation()
 })
 
 //функция ЗАКРЫТИЯ модальных окон

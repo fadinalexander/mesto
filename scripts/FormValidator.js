@@ -10,12 +10,10 @@ class FormValidator {
     //сбрасываем состояние формы в начальное состояние
     resetValidation() {
         this._inputList.forEach((input) => {
-            input.classList.remove(this._config.activeErrorClass)
             const errorElement = document.querySelector(`#${input.id}-error`)
+            this._hideInputError(errorElement, input)
             errorElement.textContent = ''
-            console.log('112233')
         });
-        this._disableButton()
     }
 
     //отображаем сообщения об ошибках вылидации + стилизация
