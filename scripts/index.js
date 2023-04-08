@@ -2,36 +2,25 @@ import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 import { initialCards, cardTemplateConfig, formValidationConfig } from './constants.js'
 
-//const template = document.querySelector('#template').content.querySelector('.element')
-
 const cardsContainer = document.querySelector('.elements__grid')
 
 const formEdit = document.forms['form_edit']
 const formAdd = document.forms['form_add']
 
-const editBtn = document.querySelector('.profile__edit-button')
-const editUserModal = document.querySelector('.popup_type_edit-user')
-
-const addBtn = document.querySelector('.profile__add-button')
-const addCardModal = document.querySelector('.popup_type_add-card')
-
-//const closeButtons = document.querySelectorAll('.popup__btn-close')
+const bottonEdit = document.querySelector('.profile__edit-button')
+const popupEditProfile = document.querySelector('.popup_type_edit-user')
+const bottonAdd = document.querySelector('.profile__add-button')
+const popupAddCard = document.querySelector('.popup_type_add-card')
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
-const nameInput = document.querySelector('.popup__form_type_name')
-const aboutInput = document.querySelector('.popup__form_type_about')
 
-// const zoomImg = document.querySelector('.popup__zoomCont-image')
-// const zoomHeader = document.querySelector('.popup__zoomCont-header')
-// const imageBtn = document.querySelector('.popup_type_zoom-image')
-
-const inputName = document.querySelector('.popup__form_type_place')
-const inputLink = document.querySelector('.popup__form_type_place-link')
+const inputProfileName = document.querySelector('.popup__form_type_name')
+const inputProfileDescription = document.querySelector('.popup__form_type_about')
+const inputCardName = document.querySelector('.popup__form_type_place')
+const inputCardLink = document.querySelector('.popup__form_type_place-link')
 
 const popupList = document.querySelectorAll('.popup');
-const formList = document.querySelectorAll('.form')
-
 
 //функция ОТКРЫТИЯ модальных окон
 const openModal = (popup) => {
@@ -62,21 +51,21 @@ const formValidatorForAddForm = new FormValidator(formValidationConfig, formAdd)
 formValidatorForAddForm.enableValidation()
 
 //слушатели 'click' для modal open
-editBtn.addEventListener('click', () => {
+bottonEdit.addEventListener('click', () => {
   //resetForms()
   formEdit.reset()
-  nameInput.value = profileName.textContent
-  aboutInput.value = profileDescription.textContent
-  openModal(editUserModal)
+  inputProfileName.value = profileName.textContent
+  inputProfileDescription.value = profileDescription.textContent
+  openModal(popupEditProfile)
 
   formValidatorForEditForm.resetValidation()
 })
 
 
-addBtn.addEventListener('click', () => {
+bottonAdd.addEventListener('click', () => {
   //resetForms()
   formAdd.reset()
-  openModal(addCardModal)
+  openModal(popupAddCard)
 
   formValidatorForAddForm.resetValidation()
 })
@@ -101,10 +90,10 @@ popupList.forEach(popup => {
 //функция-обработчик 'submit' для editUser
 const handleSubmitEditUser = (evt) => {
   evt.preventDefault()
-  profileName.textContent = nameInput.value
-  profileDescription.textContent = aboutInput.value
+  profileName.textContent = inputProfileName.value
+  profileDescription.textContent = inputProfileDescription.value
 
-  closeModal(editUserModal)
+  closeModal(popupEditProfile)
 }
 
 //слушатель 'submit' для editUser
@@ -113,10 +102,10 @@ formEdit.addEventListener('submit', handleSubmitEditUser);
 //функция-обработчик 'submit' для addCard
 const handleSubmitAddCard = (evt) => {
   evt.preventDefault()
-  renderCard({name: inputName.value, link: inputLink.value})
+  renderCard({name: inputCardName.value, link: inputCardLink.value})
   evt.target.reset()
 
-  closeModal(addCardModal)
+  closeModal(popupAddCard)
 }
 
 //слушатель 'submit' для addCard
