@@ -1,6 +1,8 @@
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
-import { initialCards, cardTemplateConfig, formValidationConfig } from './constants.js'
+import './index.css'
+
+import Card from '../scripts/Card.js'
+import FormValidator from '../scripts/FormValidator.js'
+import { initialCards, cardTemplateConfig, formValidationConfig } from '../scripts/constants.js'
 
 const cardsContainer = document.querySelector('.elements__grid')
 
