@@ -1,4 +1,4 @@
-import { cardTemplateConfig, zoomImg, zoomHeader, imageBtn } from './constants.js'
+import { cardTemplateConfig, zoomImg, zoomHeader, imageBtn } from '../utils/constants.js'
 
 class Card {
     constructor(data, cardTemplateSelector, openModal) {
