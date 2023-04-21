@@ -12,7 +12,6 @@ export default class FormValidator {
         this._inputList.forEach((input) => {
             const errorElement = document.querySelector(`#${input.id}-error`)
             this._hideInputError(errorElement, input)
-            errorElement.textContent = ''
         });
     }
 

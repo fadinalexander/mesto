@@ -27,7 +27,6 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit', evt => {
             evt.preventDefault()
             this._handleSubmitForm(this._getInputValues())
-            this.close()
         })
     }
 
@@ -40,6 +39,12 @@ export default class PopupWithForm extends Popup {
             }
         })
     }
+    // //можно записать так addCurrentUserData в компактном виде
+    // addCurrentUserData(userData) {
+    //     this._inputList.forEach(input => { 
+    //         input.value = userData[input.name] || ''
+    //      })
+    // }
 
     close() {
         super.close()

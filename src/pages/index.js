@@ -23,7 +23,7 @@ const userInfo = new UserInfo ({
 //console.log(userInfo.getUserInfo());
 
 //принимает объект карточки и возвращает разметку, используя класс Card
-const renderCard = (data) => {
+const createCard = (data) => {
   const card = new Card({
     data,
     handleCardClick: () => {
@@ -40,7 +40,7 @@ const renderCard = (data) => {
 const cardList = new Section ({
   items: initialCards,
   renderer: (data) => {
-    cardList.addItem(renderCard(data))
+    cardList.addItem(createCard(data))
   }
 }, '.elements__grid')
 
@@ -60,7 +60,7 @@ const popupCardEdit = new PopupWithForm(
 const popupCardAdd = new PopupWithForm(
   '.popup_type_add-card',
   {handleSubmitForm: (inputValue) => {
-    cardList.addItem(renderCard({
+    cardList.addItem(createCard({
       name: inputValue.name,
       link: inputValue.link
     }))

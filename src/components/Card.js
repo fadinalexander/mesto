@@ -19,7 +19,7 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector(cardTemplateConfig.likeButtonSelector).addEventListener('click', this._toggleLike)
+        this._buttonLike.addEventListener('click', this._toggleLike)
 
         this._element.querySelector(cardTemplateConfig.deleteButtonSelector).addEventListener('click', this._deleteCard)
 
@@ -36,17 +36,23 @@ export default class Card {
         this._cardName = this._element
             .querySelector(cardTemplateConfig.cardNameSelector)
             .textContent = this._name
+
+        this._buttonLike = this._element.querySelector(cardTemplateConfig.likeButtonSelector)
             
         this._setEventListeners()
 
         return this._element
     }
 
-    _toggleLike(evt) {
-        evt.target.classList.toggle(cardTemplateConfig.likeActiveClass)
+    _toggleLike = () => {
+        this._buttonLike.classList.toggle(cardTemplateConfig.likeActiveClass)
     }
 
     _deleteCard = () => {
+        //удаляем карточку
         this._element.remove()
+
+        //чистим ссылку на DOM-элемент
+        this._element = null
     }
 }
