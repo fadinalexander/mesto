@@ -22,6 +22,13 @@
 * Валидация форм реализована через класс *FormValidator* в отдельном js-файле: FormValidator.js
 * Создан файл с константами: constatns.js
 
+### Update: спринт 8
+
+* Продолжаем рефакторинг: создали классы Section, Popup, PopupWithImage, PopupWithForm, UserInfo, преобразовали класс Card
+* Настроили сбору WebPack
+* Добавили в .gitignore - node_modules, dist
+
+
 ### Deploy
 
 * [Ссылка на сайт "Место"](https://fadinalexander.github.io/mesto/)

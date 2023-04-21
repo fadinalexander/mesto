@@ -2,120 +2,98 @@ import './index.css'
 
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
-import { initialCards, cardTemplateConfig, formValidationConfig } from '../utils/constants.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import Section from '../components/Section.js'
+import UserInfo from '../components/UserInfo.js'
 
-const cardsContainer = document.querySelector('.elements__grid')
+import { initialCards, cardTemplateConfig, formValidationConfig } from '../utils/constants.js'
 
 const formEdit = document.forms['form_edit']
 const formAdd = document.forms['form_add']
-
 const bottonEdit = document.querySelector('.profile__edit-button')
-const popupEditProfile = document.querySelector('.popup_type_edit-user')
 const bottonAdd = document.querySelector('.profile__add-button')
-const popupAddCard = document.querySelector('.popup_type_add-card')
 
-const profileName = document.querySelector('.profile__name')
-const profileDescription = document.querySelector('.profile__description')
+//отображение информации о пользователе страницы
+const userInfo = new UserInfo ({
+  userNameSelector: '.profile__name',
+  userAboutSelector: '.profile__description'
+})
 
-const inputProfileName = document.querySelector('.popup__form_type_name')
-const inputProfileDescription = document.querySelector('.popup__form_type_about')
-const inputCardName = document.querySelector('.popup__form_type_place')
-const inputCardLink = document.querySelector('.popup__form_type_place-link')
+//console.log(userInfo.getUserInfo());
 
-const popupList = document.querySelectorAll('.popup');
-
-//функция ОТКРЫТИЯ модальных окон
-const openModal = (popup) => {
-  popup.classList.add('popup_opened')
-  document.addEventListener('keydown', closeByEscape)
+//принимает объект карточки и возвращает разметку, используя класс Card
+const renderCard = (data) => {
+  const card = new Card({
+    data,
+    handleCardClick: () => {
+      popupWithImage.open({
+        link: data.link,
+        name: data.name
+      })
+    }
+  }, cardTemplateConfig.templateSelector)
+  return card.generateCard()
 }
 
-//функция отрисовки карточки методом prepend()
-const renderCard = (dataCard) => {
-  const card = new Card(dataCard, cardTemplateConfig.templateSelector, openModal)
-  cardsContainer.prepend(card.generateCard(dataCard))
-}
+//отрисовывает список карточек
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (data) => {
+    cardList.addItem(renderCard(data))
+  }
+}, '.elements__grid')
 
-//итерация каждого элемента массива
-// initialCards.forEach((dataCard) => {
-//   renderCard(dataCard)
-// })
-initialCards.forEach(renderCard)
+//открывает попап с увеличенной картинкой карточки
+const popupWithImage = new PopupWithImage('.popup_type_zoom-image')
 
-// function resetForms() {
-//   formList.forEach(form => form.reset())
-// }
+//объект класса позволяет редактировать профиль пользователя
+const popupCardEdit = new PopupWithForm(
+  '.popup_type_edit-user',
+  {handleSubmitForm: (inputValue) => {
+    userInfo.setUserInfo(inputValue)
+    popupCardEdit.close()
+  }}
+)
 
+//объект класса позволяет добавлять новую карточку на страницу
+const popupCardAdd = new PopupWithForm(
+  '.popup_type_add-card',
+  {handleSubmitForm: (inputValue) => {
+    cardList.addItem(renderCard({
+      name: inputValue.name,
+      link: inputValue.link
+    }))
+    popupCardAdd.close()
+  }}
+)
+
+//валидация
 const formValidatorForEditForm = new FormValidator(formValidationConfig, formEdit)
 formValidatorForEditForm.enableValidation()
 
+//валидация
 const formValidatorForAddForm = new FormValidator(formValidationConfig, formAdd)
 formValidatorForAddForm.enableValidation()
 
-//слушатели 'click' для modal open
-bottonEdit.addEventListener('click', () => {
-  //resetForms()
-  formEdit.reset()
-  inputProfileName.value = profileName.textContent
-  inputProfileDescription.value = profileDescription.textContent
-  openModal(popupEditProfile)
-
-  formValidatorForEditForm.resetValidation()
-})
-
-
+//назначаем обработчиков на кнопку добавления карточек
 bottonAdd.addEventListener('click', () => {
-  //resetForms()
   formAdd.reset()
-  openModal(popupAddCard)
-
+  popupCardAdd.open()
   formValidatorForAddForm.resetValidation()
 })
 
-//функция ЗАКРЫТИЯ модальных окон
-const closeModal = (popup) => {
-  popup.classList.remove('popup_opened')
-  document.removeEventListener('keydown', closeByEscape)
-}
-
-popupList.forEach(popup => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closeModal(popup)
-    }
-    else if (evt.target.classList.contains('popup__btn-close')) {
-      closeModal(popup)
-    }
-  })
+//назначаем обработчиков на кнопку редактирования профиля
+bottonEdit.addEventListener('click', () => {
+  formEdit.reset()
+  popupCardEdit.addCurrentUserData(userInfo.getUserInfo())
+  popupCardEdit.open()
+  formValidatorForEditForm.resetValidation()
 })
 
-//функция-обработчик 'submit' для editUser
-const handleSubmitEditUser = (evt) => {
-  evt.preventDefault()
-  profileName.textContent = inputProfileName.value
-  profileDescription.textContent = inputProfileDescription.value
+popupWithImage.setEventListeners()
+popupCardEdit.setEventListeners()
+popupCardAdd.setEventListeners()
 
-  closeModal(popupEditProfile)
-}
-
-//слушатель 'submit' для editUser
-formEdit.addEventListener('submit', handleSubmitEditUser);
-
-//функция-обработчик 'submit' для addCard
-const handleSubmitAddCard = (evt) => {
-  evt.preventDefault()
-  renderCard({name: inputCardName.value, link: inputCardLink.value})
-  evt.target.reset()
-
-  closeModal(popupAddCard)
-}
-
-//слушатель 'submit' для addCard
-formAdd.addEventListener('submit', handleSubmitAddCard)
-
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedModal = document.querySelector('.popup_opened')
-    closeModal(openedModal)
-  }
-}
+//отрисовываем карточки на странице
+cardList.renderItems()

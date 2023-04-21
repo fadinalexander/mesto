@@ -1,19 +1,20 @@
-//отрисовка элементов на странице
-
-class Section {
-    constructor({ items, renderer }, selector) {
-        this._items = items //это совйство - массив данных, которые нужно добавить на страницу при инициализации класса
-        this._renderer = renderer //это свойство - это функция, которая отвечает за отрисовку и создание данных на странице
-        this._selector = document.querySelector(selector) //этот параметр - это селектор контейнера, в который нужно добавлять созданные элементы
+//класс отвечает за отрисовку элементов на странице
+export default class Section {
+    constructor({items, renderer}, containerSelector) {
+        this._items = items
+        this._renderer = renderer
+        this._container = document.querySelector(containerSelector)
     }
 
-    //метод занимаетя отрисовкой каждого отдельного элемента
-    renderer() {
-
+    //метод отрисовывает элементы, исспользуя колбек функцию renderer
+    renderItems() {
+        this._items.forEach(item => {
+            this._renderer(item)
+        })
     }
 
-    //метод занимается тем, что принимает DOM-элемент и добавляет его в контейнер
-    addItem() {
-        
+    //метод принимает DOM-элементы и добавляет его в контейнер
+    addItem(element) {
+        this._container.prepend(element)
     }
 }
