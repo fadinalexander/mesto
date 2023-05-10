@@ -1,6 +1,6 @@
 .element__place-like {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     background-color: #fff;
     max-width: 246px;
     max-height: 23px;

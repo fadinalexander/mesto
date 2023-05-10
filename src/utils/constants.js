@@ -47,6 +47,7 @@ const cardTemplateConfig = {
   cardNameSelector: '.element__description',
   deleteButtonSelector: '.element__delete-button',
   likeButtonSelector: '.element__like-button',
+  counterLikeSelector: '.element__like-counter',
   likeActiveClass: 'element__like-button_active',
 }
 

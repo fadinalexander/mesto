@@ -3,8 +3,8 @@
     flex-wrap: wrap;
     box-sizing: border-box;
     padding-left: 30px;
-    max-width: 400px;
-    width: 100%;
+    max-width: 550px;
+    /* width: 100%; */
 }
 
 @media screen and (max-width: 618px) {

@@ -9,17 +9,22 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector('.form')
         this._handleSubmitForm = handleSubmitForm
         this._inputList = this._form.querySelectorAll('.popup__form')
+
+        this._buttonSubmit = this._popup.querySelector('.popup__btn-save')
+        this._buttonSubmitText = this._buttonSubmit.textContent
     }
+
 
     _getInputValues() {
         this._valuesForInputs = {}
 
         this._inputList.forEach(input => {
-            this._valuesForInputs[input.getAttribute('name')] = input.value
+            this._valuesForInputs[input.name] = input.value
         })
 
         return this._valuesForInputs
     }
+
 
     setEventListeners() {
         super.setEventListeners()
@@ -29,6 +34,7 @@ export default class PopupWithForm extends Popup {
             this._handleSubmitForm(this._getInputValues())
         })
     }
+
 
     addCurrentUserData(userData) {
         this._inputList.forEach(input => {
@@ -46,8 +52,13 @@ export default class PopupWithForm extends Popup {
     //      })
     // }
 
-    close() {
-        super.close()
-        this._form.reset()
+
+    handleButtonLoading(isLoading, textOnLoad) {
+        console.log(this._buttonSubmit)
+        if (isLoading) {
+            this._buttonSubmit.textContent = textOnLoad
+        } else {
+            this._buttonSubmit.textContent = this._buttonSubmitText
+        }
     }
 }

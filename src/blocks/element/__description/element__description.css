@@ -2,7 +2,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: calc(246px - 5px - 22px);
+    width: calc(246px - 5px - 22px);
     max-height: 28px;
     color: #000;
     margin: 0;
