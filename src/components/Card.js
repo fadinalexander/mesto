@@ -25,6 +25,11 @@ export default class Card {
         return cardElement
     }
 
+    remove() {
+        this._element.remove()
+        this._element = null
+    }
+
 
     isLiked(likes, userId) {
         return likes.some(like => like._id === userId)
@@ -90,10 +95,5 @@ export default class Card {
         this._setEventListeners()
 
         return this._element
-    }
-
-    remove() {
-        this._element.remove()
-        this._element = null
     }
 }

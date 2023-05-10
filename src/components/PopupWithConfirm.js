@@ -11,6 +11,13 @@ export default class PopupWithConfirm extends Popup {
         this._buttonSubmitText = this._buttonSubmit.textContent
     }
 
+
+    open(cardElement) {
+        this._cardElement = cardElement
+        super.open()
+    }
+
+
     setEventListeners() {
         super.setEventListeners()
 
@@ -20,11 +27,6 @@ export default class PopupWithConfirm extends Popup {
         })
     }
 
-
-    open(cardElement) {
-        this._cardElement = cardElement
-        super.open()
-    }
 
     handleButtonLoading(isLoading, textOnLoad) {
         console.log(this._buttonSubmit)

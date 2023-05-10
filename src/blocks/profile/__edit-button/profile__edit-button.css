@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 424px) {
     .profile__edit-button {
-        background-image: url(../../../images/Edit\ Button_mobile.svg);
+        background-image: url(../../../images/Edit_Button_mobile.svg);
         width: 18px;
         height: 18px;
         margin-left: 10px;

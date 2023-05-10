@@ -8,7 +8,7 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import Section from '../components/Section.js'
 import UserInfo from '../components/UserInfo.js'
 
-import { initialCards, cardTemplateConfig, formValidationConfig } from '../utils/constants.js'
+import { cardTemplateConfig, formValidationConfig } from '../utils/constants.js'
 import PopupWithConfirm from '../components/PopupWithConfirm.js'
 
 const formEdit = document.forms['form_edit']
@@ -30,23 +30,14 @@ const api = new Api({
   }
 })
 
-api.getProfile()
-  .then((data) => {
-    userInfo.setUserInfo(data)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-
-  
-  api.getInitialCards()
-  .then((cards) => {
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData)
     cardList.renderItems(cards)
   })
   .catch((err) => {
     console.log(err)
   })
-
 
 
 //отображение информации о пользователе страницы
@@ -61,7 +52,7 @@ const popupWithConfirm = new PopupWithConfirm('.popup-type-confirm-remove', {
     popupWithConfirm.handleButtonLoading(true, 'Удаление...')
 
     api.deleteCard(cardElement.cardId)
-      .then((data) => {
+      .then(() => {
         cardElement.remove()
       })
         .then(() => popupWithConfirm.close())
@@ -89,9 +80,14 @@ const createCard = (data, userId) => {
     handleCardLike: () => {
 
       api.likeCard(card.cardId, card.isLiked(card.likes))
-      .then(res => card.like(res))
+      .then((data) => {
+        card.like(data)})
+      .catch((err) => {
+        console.log(err)
+      })
     },
     userId: userId}, data, cardTemplateConfig.templateSelector)
+
   return card.generateCard()
 }
 
@@ -113,20 +109,17 @@ const popupCardEdit = new PopupWithForm(
     popupCardEdit.handleButtonLoading(true, 'Сохранение...')
 
     api.patchProfile(inputValue)
-      .then((res) => {
-      api.getProfile(res)
-        .then((data) => {
-          userInfo.setUserInfo(data)
-        })
-      popupCardEdit.close()
+      .then((data) => {
+        userInfo.setUserInfo(data)
+        popupCardEdit.close()
     })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      popupCardEdit.handleButtonLoading(false)
-    })
-  }}
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        popupCardEdit.handleButtonLoading(false)
+     })
+    }}
 )
 
 

@@ -53,6 +53,12 @@ export default class PopupWithForm extends Popup {
     // }
 
 
+    close() {
+        super.close()
+        this._form.reset()
+    }
+
+
     handleButtonLoading(isLoading, textOnLoad) {
         console.log(this._buttonSubmit)
         if (isLoading) {
