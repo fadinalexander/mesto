@@ -18,6 +18,6 @@ export default class UserInfo {
         this._userNameElement.textContent = name
         this._userAboutElement.textContent = about
         this._userAvatarSelector.src = avatar
-        this._profileId = _id
+        this.profileId = _id
     }
 }
