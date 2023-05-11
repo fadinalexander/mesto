@@ -29,7 +29,6 @@ export default class PopupWithConfirm extends Popup {
 
 
     handleButtonLoading(isLoading, textOnLoad) {
-        console.log(this._buttonSubmit)
         if (isLoading) {
             this._buttonSubmit.textContent = textOnLoad
         } else {

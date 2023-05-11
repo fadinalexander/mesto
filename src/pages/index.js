@@ -53,22 +53,15 @@ const userInfo = new UserInfo ({
 const popupAvatarChange = new PopupWithForm(
   '.popup-type-change-avatar',
   {handleSubmitForm: (inputValue) => {
-    // popupAvatarChange.handleButtonLoading(true, 'Сохранение...')
 
     return api.setUserAvatar(inputValue)
       .then((data) => {
         userInfo.setUserInfo(data)
         return data
       })
-      // .then((result) => {
-      //   console.log(result)})
       .catch((err) => {
         console.log(err)
       })
-      // .finally(() => {
-      //   popupAvatarChange.handleButtonLoading(false)
-      // })
-
   }}
 )
 
@@ -78,7 +71,6 @@ const popupAvatarChange = new PopupWithForm(
 const popupCardEdit = new PopupWithForm(
   '.popup_type_edit-user',
   {handleSubmitForm: (inputValue) => {
-    // popupCardEdit.handleButtonLoading(true, 'Сохранение...')
 
     return api.patchProfile(inputValue)
       .then((data) => {
@@ -87,9 +79,6 @@ const popupCardEdit = new PopupWithForm(
       .catch((err) => {
         console.log(err)
       })
-    //   .finally(() => {
-    //     popupCardEdit.handleButtonLoading(false)
-    //  })
     }}
 )
 
@@ -99,7 +88,6 @@ const popupCardEdit = new PopupWithForm(
 const popupCardAdd = new PopupWithForm(
   '.popup_type_add-card',
   {handleSubmitForm: (inputValue) => {
-    // popupCardAdd.handleButtonLoading(true, 'Сохранение...')
 
     return api.postInitialCards({
       name: inputValue.name,
@@ -111,9 +99,6 @@ const popupCardAdd = new PopupWithForm(
       .catch((err) => {
         console.log(err)
       })
-      // .finally(() => {
-      //   popupCardAdd.handleButtonLoading(false)
-      // })
   }}
 )
 
