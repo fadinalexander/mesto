@@ -86,6 +86,8 @@ export default class FormValidator {
                 this._toggleButtonState()
             })
         })
+
+        this._toggleButtonState()
     }
     //ищем все на странице, вызываем функцию setEventListeners для каждой формы, передаем форме список инпутов и кнопку submit 
     enableValidation() {

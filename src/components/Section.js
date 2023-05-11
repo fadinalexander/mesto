@@ -7,8 +7,9 @@ export default class Section {
     }
 
     //метод отрисовывает элементы, исспользуя колбек функцию renderer
+    //метод reverse() развернет массив карточек перед тем, как вставлять новые карточки
     renderItems(items) {
-        items.forEach(item => {
+        items.reverse().forEach(item => {
             this._renderer(item)
         })
     }

@@ -186,14 +186,12 @@ formValidatorForAddForm.enableValidation()
 
 //change_avatar_popup_button
 buttonChangeAvatar.addEventListener('click', () => {
-  popupAvatarChange.close()
   popupAvatarChange.open()
   formValidatorForChangeAvatarForm.resetValidation()
 })
 
 //edit_profile_popup_button
 buttonEdit.addEventListener('click', () => {
-  popupCardEdit.close()
   popupCardEdit.addCurrentUserData(userInfo.getUserInfo())
   popupCardEdit.open()
   formValidatorForEditForm.resetValidation()
@@ -201,7 +199,6 @@ buttonEdit.addEventListener('click', () => {
 
 //add_new-card_popup_button
 buttonAdd.addEventListener('click', () => {
-  popupCardAdd.close()
   popupCardAdd.open()
   formValidatorForAddForm.resetValidation()
 })
